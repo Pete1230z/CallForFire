@@ -6,20 +6,29 @@ import java.util.Scanner;
 
 //Class that creates CallForFire
 public class CallForFire {
-	private int UserGrid;
 	private String MGRS;
 	private String grid;
+	private int index;
     
 	//Constructor that sets the CallForFire parameters
-	public CallForFire(int UserGrid, String MGRS, String grid) {
-		this.UserGrid = UserGrid;
-		this.MGRS = String.valueOf(UserGrid);
+	public CallForFire(String MGRS, String grid) {
+		this.MGRS = MGRS;
 		this.grid = grid;
 	}
 
 	public String getMGRS() {
-		return MGRS;
+		int index = MGRS.length() / 2;
+        String MGRSFront = MGRS.substring(0, index);
+		String MGRSBack = MGRS.substring(index);
+		String Space = " ";
+		return MGRSFront.toString() + Space + MGRSBack.toString();
 	}
 
+	public String getGrid() {
+		return grid;
+	}
 
+	public int getIndex() {
+		return index;
+	}
 }
