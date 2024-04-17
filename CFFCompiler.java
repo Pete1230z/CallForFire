@@ -6,8 +6,19 @@ import java.util.Scanner;
 
 public class CFFCompiler {
 	public static void main(String[] args) {
-		CallForFire test = new CallForFire("12345678", "Kill Myself");
-		System.out.println(test.getMGRS());
-		System.out.println(test.getGrid());
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter your position in MGRS Grid with your Grid Zone Designator: ");
+		String MGRS = input.nextLine();
+		System.out.print("Your position in MGRS Grid is" + " " + getMGRSFormat(MGRS));
 	}	
+	
+    //Converts MGRS Grid into a proper format
+	public static String getMGRSFormat(String MGRS) {
+		 int index = MGRS.length() / 2;
+         String MGRSFront = MGRS.substring(0, index);
+		 String MGRSBack = MGRS.substring(index);
+		 String Space = " ";
+		 return MGRSFront.toString() + Space + MGRSBack.toString();
+	}
 }
+
