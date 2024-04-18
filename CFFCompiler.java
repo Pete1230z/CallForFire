@@ -35,6 +35,11 @@ public class CFFCompiler {
 		String targetDescription = input.nextLine();
 		System.out.println("Target description is" + " " + targetDescription);
 		System.out.print("How would you like to engage the target?");
+		System.out.println("1. Type of Adjustment\n2. Danger Close\n3. Mark\n4. Trajectory\n5. Ammunition\n6. Distribution");
+		System.out.print("Choose A Number: ");
+
+		System.out.println("1. When Ready\n2. At My Command\n3. Cannot Observe\n4. Time on Target\n5. Time To Target\n6. Coordinated Illumination\n7. Continuous Illumination\n8. Cease Load\n9. Check Fire\n 10. Continuous Fire\n 11. Repeat\n12. Request Splash\n13. Do Not Load\n14. Duration");
+		System.out.print("Choose A Number: ");
 	}
 
 	 //Converts MGRS Grid into a proper format
