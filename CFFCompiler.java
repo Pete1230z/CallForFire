@@ -14,6 +14,10 @@ public class CFFCompiler {
 		System.out.print("Enter your position in MGRS Format: ");
 		String MGRS = input.nextLine();
 		System.out.println("Your position in MGRS Grid is" + " " + GridZone + " " + getMGRSFormat(MGRS));
+		//System.out.println("What is your type of mission?");
+		//System.out.println("1. Adjust Fire\n2. Fire For Effect\n3. Suppress\n4. Immediate Suppression\n5. Suppression of Enemy Air Defenses");
+		//System.out.print("Choose A Number: ");
+
 		System.out.println("What is your method of target location?");
 		System.out.println("1. Grid\n2. Polar\n3. Shift");
 		System.out.print("Choose A Number: ");
@@ -38,6 +42,32 @@ public class CFFCompiler {
 		String Space = " ";
 		return MGRSFront.toString() + Space + MGRSBack.toString();
    }
+
+   //Returns the value of the user input
+	public static int getMissionNumber(Scanner input) {
+		int missionNumber = 0;
+		try {
+			choice = input.nextInt();
+		} catch(Exception ex) {
+			System.out.println("This is not a valid selection");
+		}
+		return missionNumber;
+	}
+
+	//Takes the value of choice and returns a string with the associated mission
+	public static void getTypeOfMission(int missionNumber) {
+		if (missionNumber == 1) {
+			System.out.println("You are conducting an Adjust Fire Mission");
+		} else if(missionNumber == 2) {
+			System.out.println("You are conducting a Fire For Effect");
+		} else if(missionNumber == 3) {
+			System.out.println("You are conducting a Suppression Mission");
+		}  else if(missionNumber == 4) {
+			System.out.println("You are conducting an Immediate Suppression Mission");
+		} else if(missionNumber == 5) {
+			System.out.println("You are conducting a Suppression of Enemy Air Defense");
+		}
+	}
     
 	//Returns the value of the user input
 	public static int getChoice(Scanner input) {
