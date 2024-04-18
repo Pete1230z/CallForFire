@@ -9,11 +9,14 @@ public class CFFCompiler {
 	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
-		System.out.print("Enter your position in MGRS Grid with your Grid Zone Designator: ");
+		System.out.print("Enter your Grid Zone Designator: ");
+		String GridZone = input.nextLine();
+		System.out.print("Enter your position in MGRS Format: ");
 		String MGRS = input.nextLine();
-		System.out.println("Your position in MGRS Grid is" + " " + getMGRSFormat(MGRS));
+		System.out.println("Your position in MGRS Grid is" + " " + GridZone + " " + getMGRSFormat(MGRS));
 		System.out.println("What is your method of target location?");
 		System.out.println("1. Grid\n2. Polar\n3. Shift");
+		System.out.print("Choose A Number: ");
 		int choice = getChoice(input);
 		conductMission(choice);	
 	}
