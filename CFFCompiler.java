@@ -14,10 +14,13 @@ public class CFFCompiler {
 		System.out.print("Enter your position in MGRS Format: ");
 		String MGRS = input.nextLine();
 		System.out.println("Your position in MGRS Grid is" + " " + GridZone + " " + getMGRSFormat(MGRS));
-		//System.out.println("What is your type of mission?");
-		//System.out.println("1. Adjust Fire\n2. Fire For Effect\n3. Suppress\n4. Immediate Suppression\n5. Suppression of Enemy Air Defenses");
-		//System.out.print("Choose A Number: ");
-
+		System.out.println("What is your type of mission?");
+		System.out.println("1. Adjust Fire\n2. Fire For Effect\n3. Suppression\n4. Immediate Suppression\n5. Suppression of Enemy Air Defenses");
+		System.out.print("Choose A Number: ");
+		int missionNumber = getMissionNumber(input);
+		getTypeOfMission(missionNumber);
+		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
+		input.nextLine();
 		System.out.println("What is your method of target location?");
 		System.out.println("1. Grid\n2. Polar\n3. Shift");
 		System.out.print("Choose A Number: ");
