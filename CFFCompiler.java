@@ -19,7 +19,22 @@ public class CFFCompiler {
 		System.out.print("Choose A Number: ");
 		int choice = getChoice(input);
 		conductMission(choice);	
+		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
+		input.nextLine();
+		System.out.print("Enter enemy grid: ");
+		String targetLocation = input.nextLine();
+		System.out.println("Enemy position is" + " " + GridZone + " " + getTargetLocation(targetLocation));
+		System.out.print("How would you like to engage the target?");
 	}
+
+	 //Converts MGRS Grid into a proper format
+	 public static String getMGRSFormat(String MGRS) {
+		int index = MGRS.length() / 2;
+		String MGRSFront = MGRS.substring(0, index);
+		String MGRSBack = MGRS.substring(index);
+		String Space = " ";
+		return MGRSFront.toString() + Space + MGRSBack.toString();
+   }
     
 	//Returns the value of the user input
 	public static int getChoice(Scanner input) {
@@ -42,14 +57,16 @@ public class CFFCompiler {
 			System.out.println("You are conducting a Shift Mission");
 		}
 	}
+
+	//Converts MGRS Grid into a proper format
+	public static String getTargetLocation(String targetLocation) {
+		int index = targetLocation.length() / 2;
+		String targetFront = targetLocation.substring(0, index);
+		String targetBack = targetLocation.substring(index);
+		String Space = " ";
+		return targetFront.toString() + Space + targetBack.toString();
+   }
+
 	
-    //Converts MGRS Grid into a proper format
-	public static String getMGRSFormat(String MGRS) {
-		 int index = MGRS.length() / 2;
-         String MGRSFront = MGRS.substring(0, index);
-		 String MGRSBack = MGRS.substring(index);
-		 String Space = " ";
-		 return MGRSFront.toString() + Space + MGRSBack.toString();
-	}
 }
 
