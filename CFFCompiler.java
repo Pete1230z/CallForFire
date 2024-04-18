@@ -24,6 +24,9 @@ public class CFFCompiler {
 		System.out.print("Enter enemy grid: ");
 		String targetLocation = input.nextLine();
 		System.out.println("Enemy position is" + " " + GridZone + " " + getTargetLocation(targetLocation));
+		System.out.print("Enter target description: ");
+		String targetDescription = input.nextLine();
+		System.out.println("Target description is" + " " + targetDescription);
 		System.out.print("How would you like to engage the target?");
 	}
 
@@ -66,6 +69,29 @@ public class CFFCompiler {
 		String Space = " ";
 		return targetFront.toString() + Space + targetBack.toString();
    }
+
+   //Returns the value of the user input
+	public static int getMethodEngagement(Scanner input) {
+		int choice = 0;
+		try {
+			choice = input.nextInt();
+		} catch(Exception ex) {
+			System.out.println("This is not a valid selection");
+		}
+		return choice;
+	}
+
+	//Takes the value of choice and returns a string with the associated mission
+	public static void methodEngagement(int choice) {
+		if (choice == 1) {
+			System.out.println("You are conducting a Grid Mission");
+		} else if(choice == 2) {
+			System.out.println("You are conducting a Polar Mission");
+		} else if(choice == 3) {
+			System.out.println("You are conducting a Shift Mission");
+		}
+	}
+
 
 	
 }
