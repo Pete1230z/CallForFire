@@ -34,12 +34,19 @@ public class CFFCompiler {
 		System.out.print("Enter target description: ");
 		String targetDescription = input.nextLine();
 		System.out.println("Target description is" + " " + targetDescription);
-		System.out.print("How would you like to engage the target?");
-		System.out.println("1. Type of Adjustment\n2. Danger Close\n3. Mark\n4. Trajectory\n5. Ammunition\n6. Distribution");
+		System.out.print("How would you like to engage the target? (Optional)");
+		System.out.println("\n1. NA\n2. Type of Adjustment\n3. Danger Close\n34 Mark\n5. Trajectory\n6. Ammunition\n7. Distribution");
 		System.out.print("Choose A Number: ");
-
-		System.out.println("1. When Ready\n2. At My Command\n3. Cannot Observe\n4. Time on Target\n5. Time To Target\n6. Coordinated Illumination\n7. Continuous Illumination\n8. Cease Load\n9. Check Fire\n 10. Continuous Fire\n 11. Repeat\n12. Request Splash\n13. Do Not Load\n14. Duration");
+		int engagement = getMethodEngagement(input);
+		methodEngagement(engagement);
+		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
+		input.nextLine();
+		System.out.println("1. When Ready\n2. At My Command\n3. Cannot Observe\n4. Time on Target\n5. Time To Target\n6. Coordinated Illumination\n7. Continuous Illumination\n8. Cease Load\n9. Check Fire\n10. Continuous Fire\n11. Repeat\n12. Request Splash\n13. Do Not Load\n14. Duration");
 		System.out.print("Choose A Number: ");
+		int fire = getFireControl(input);
+		methodFireControl(fire);
+		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
+		input.nextLine();
 	}
 
 	 //Converts MGRS Grid into a proper format
@@ -91,11 +98,11 @@ public class CFFCompiler {
 	//Takes the value of choice and returns a string with the associated mission
 	public static void conductMission(int choice) {
 		if (choice == 1) {
-			System.out.println("You are conducting a Grid Mission");
+			System.out.println("Grid is your method of target location");
 		} else if(choice == 2) {
-			System.out.println("You are conducting a Polar Mission");
+			System.out.println("Polar is your method of target location");
 		} else if(choice == 3) {
-			System.out.println("You are conducting a Shift Mission");
+			System.out.println("Shift is your method of target location");
 		}
 	}
 
@@ -110,25 +117,48 @@ public class CFFCompiler {
 
    //Returns the value of the user input
 	public static int getMethodEngagement(Scanner input) {
-		int choice = 0;
+		int engagement = 0;
 		try {
-			choice = input.nextInt();
+			engagement = input.nextInt();
 		} catch(Exception ex) {
 			System.out.println("This is not a valid selection");
 		}
-		return choice;
+		return engagement;
 	}
 
-	//Takes the value of choice and returns a string with the associated mission
-	public static void methodEngagement(int choice) {
-		if (choice == 1) {
-			System.out.println("You are conducting a Grid Mission");
-		} else if(choice == 2) {
-			System.out.println("You are conducting a Polar Mission");
-		} else if(choice == 3) {
-			System.out.println("You are conducting a Shift Mission");
+	//Takes the value of engagement and returns a string with the associated mission
+	public static void methodEngagement(int engagement) {
+		if (engagement == 1) {
+			System.out.println("Grid is your method of target location");
+		} else if(engagement == 2) {
+			System.out.println("Polar is your method of target location");
+		} else if(engagement == 3) {
+			System.out.println("Shift is your method of target location");
 		}
 	}
+
+	//Returns the value of the user input
+	public static int getFireControl(Scanner input) {
+		int fire = 0;
+		try {
+			fire = input.nextInt();
+		} catch(Exception ex) {
+			System.out.println("This is not a valid selection");
+		}
+		return fire;
+	}
+
+	//Takes the value of engagement and returns a string with the associated mission
+	public static void methodFireControl(int fire) {
+		if (fire == 1) {
+			System.out.println("Grid is your method of target location");
+		} else if(fire == 2) {
+			System.out.println("Polar is your method of target location");
+		} else if(fire == 3) {
+			System.out.println("Shift is your method of target location");
+		}
+	}
+
 
 
 	
