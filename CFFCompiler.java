@@ -14,15 +14,29 @@ public class CFFCompiler {
 		System.out.println("Your position in MGRS Grid is" + " " + getMGRSFormat(MGRS));
 		System.out.println("What is your method of target location?");
 		System.out.println("1. Grid\n2. Polar\n3. Shift");
-		int choice = input.nextInt();
+		int choice = getChoice(input);
+		conductMission(choice);	
+	}
+    
+	//Returns the value of the user input
+	public static int getChoice(Scanner input) {
+		int choice = 0;
+		try {
+			choice = input.nextInt();
+		} catch(Exception ex) {
+			System.out.println("This is not a valid selection");
+		}
+		return choice;
+	}
+
+	//Takes the value of choice and returns a string with the associated mission
+	public static void conductMission(int choice) {
 		if (choice == 1) {
-			System.out.println("Your are conducting a Grid mission");
+			System.out.println("You are conducting a Grid Mission");
 		} else if(choice == 2) {
-			System.out.println("Your are conducting a Grid mission");
-		} else if(choice == 3){
-			System.out.println("Your are conducting a Grid mission");
-		} else {
-			System.out.println("That is not an option.");
+			System.out.println("You are conducting a Polar Mission");
+		} else if(choice == 3) {
+			System.out.println("You are conducting a Shift Mission");
 		}
 	}
 	
