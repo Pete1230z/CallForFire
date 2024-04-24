@@ -32,7 +32,7 @@ public class CFFCompiler {
 		String targetDescription = input.nextLine();
 		System.out.println("Target description is" + " " + targetDescription);
 		System.out.print("How would you like to engage the target? (Optional)");
-		System.out.println("\n1. NA\n2. Type of Adjustment\n3. Danger Close\n34 Mark\n5. Trajectory\n6. Ammunition\n7. Distribution");
+		System.out.println("\n1. NA\n2. Type of Adjustment\n3. Danger Close\n4. Mark\n5. Trajectory\n6. Ammunition\n7. Distribution");
 		System.out.print("Choose A Number: ");
 		int engagement = getMethodEngagement(input);
 		methodEngagement(engagement);
@@ -42,7 +42,7 @@ public class CFFCompiler {
 		System.out.print("Choose A Number: ");
 		int fire = getFireControl(input);
 		methodFireControl(fire);
-		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
+		//When methodFireControl calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
 		
 	}
@@ -105,12 +105,21 @@ public class CFFCompiler {
 		} else if(choice == 2) {
 			Scanner input = new Scanner(System.in);
 			System.out.print("Distance to Target in Meters: ");
-	        String distacneToTarget = input.nextLine();
+	        String distanceToTarget = input.nextLine();
 	        System.out.print("Direction to Target in Mils: ");
 	        String directionToTarget = input.nextLine();
-	        System.out.println("Distance" + " " + distacneToTarget + " " + "meters" + " " + "Direction" + " " + directionToTarget + " " + "mils");
+	        System.out.println("Distance" + " " + distanceToTarget + " " + "meters" + " " + "Direction" + " " + directionToTarget + " " + "mils");
 		} else if(choice == 3) {
-			System.out.println("Shift is your method of target location");
+			Scanner input = new Scanner(System.in);
+			System.out.print("Identify know point: Example AB1000: ");
+	        String knownPoint = input.nextLine();
+	        System.out.print("Direction to New Target in Mils: ");
+	        String directionNewTarget = input.nextLine();
+			System.out.print("Lateral Shift in Meters: Example Left 30: ");
+	        String leftRight = input.nextLine();
+			System.out.print("Range Shift in Meters: Example Add 100: ");
+	        String addDrop = input.nextLine();
+	        System.out.println("Shift" + " " + knownPoint + " " + "Direction" + " " + directionNewTarget + " " + "mils" + " " + leftRight + " " + "meters" + " " + addDrop + " " + "meters");
 		}
 	}
 
@@ -121,16 +130,6 @@ public class CFFCompiler {
 		String targetBack = targetLocation.substring(index);
 		String Space = " ";
 		return targetFront.toString() + Space + targetBack.toString();
-   }
-
-   public static String ifgridMission(Scanner input, String gridMission) {
-		System.out.print("Enter Enemy Grid Zone Designator: ");
-	    String EnemyGridZone = input.nextLine();
-	    System.out.print("Enter enemy grid: ");
-	    String targetLocation = input.nextLine();
-	    System.out.print(targetLocation);
-	    gridMission = "Enemy position is" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation);
-		return gridMission;
    }
 
    //Returns the value of the user input
@@ -147,12 +146,19 @@ public class CFFCompiler {
 	//Takes the value of engagement and returns a string with the associated mission
 	public static void methodEngagement(int engagement) {
 		if (engagement == 1) {
-			System.out.println("Grid is your method of target location");
 		} else if(engagement == 2) {
-			System.out.println("Polar is your method of target location");
+			System.out.println("Type of Adjustment is your method of target engagement");
 		} else if(engagement == 3) {
-			System.out.println("Shift is your method of target location");
-		}
+			System.out.println("Danger Close is your method of target engagement");
+		} else if(engagement == 4) {
+			System.out.println("Mark is your method of target engagement");
+		} else if(engagement == 5) {
+			System.out.println("Trajectory is your method of target engagement");
+		} else if(engagement == 6) {
+			System.out.println("Ammunition is your method of target engagement");
+		} else if(engagement == 7) {
+			System.out.println("Distribution is your method of target engagement");
+		} 
 	}
 
 	//Returns the value of the user input
@@ -169,16 +175,36 @@ public class CFFCompiler {
 	//Takes the value of engagement and returns a string with the associated mission
 	public static void methodFireControl(int fire) {
 		if (fire == 1) {
-			System.out.println("Grid is your method of target location");
 		} else if(fire == 2) {
-			System.out.println("Polar is your method of target location");
+			System.out.println("At my Command is your method of fire and control");
 		} else if(fire == 3) {
-			System.out.println("Shift is your method of target location");
-		}
+			System.out.println("Cannot Observe is your method of fire and control");
+		} else if(fire == 4) {
+			System.out.println("Time on Target is your method of fire and control");
+		} else if(fire == 5) {
+			System.out.println("Time to Target is your method of fire and control");
+		} else if(fire == 6) {
+			System.out.println("Coordinated Illumination is your method of fire and control");
+		} else if(fire == 6) {
+			System.out.println("Continuous Illumination is your method of fire and control");
+		} else if(fire == 8) {
+			System.out.println("Cease Load is your method of fire and control");
+		} else if(fire == 9) {
+			System.out.println("Check Fire is your method of fire and control");
+		} else if(fire == 10) {
+			System.out.println("Continuous Fire is your method of fire and control");
+		} else if(fire == 11) {
+			System.out.println("Repeat is your method of fire and control");
+		} else if(fire == 12) {
+			System.out.println("Request Splash is your method of fire and control");
+		} else if(fire == 13) {
+			System.out.println("Do Not Load is your method of fire and control");
+		} else if(fire == 14) {
+			System.out.println("Duration is your method of fire and control");
 	}
 
 
-
+	}
 	
 }
 
