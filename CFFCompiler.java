@@ -25,9 +25,7 @@ public class CFFCompiler {
 		System.out.println("1. Grid\n2. Polar\n3. Shift");
 		System.out.print("Choose A Number: ");
 		int choice = getChoice(input);
-		conductMission(choice);	
-		//Check to see if it is a Polar or Shift Mission
-		
+		conductMission(choice);		
 		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
 		System.out.print("Enter target description: ");
@@ -105,7 +103,12 @@ public class CFFCompiler {
 	        String targetLocation = input.nextLine();
 	        System.out.println("Enemy position is" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation));
 		} else if(choice == 2) {
-			System.out.println("Polar is your method of target location");
+			Scanner input = new Scanner(System.in);
+			System.out.print("Distance to Target in Meters: ");
+	        String distacneToTarget = input.nextLine();
+	        System.out.print("Direction to Target in Mils: ");
+	        String directionToTarget = input.nextLine();
+	        System.out.println("Distance" + " " + distacneToTarget + " " + "meters" + " " + "Direction" + " " + directionToTarget + " " + "mils");
 		} else if(choice == 3) {
 			System.out.println("Shift is your method of target location");
 		}
