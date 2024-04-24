@@ -10,10 +10,10 @@ public class CFFCompiler {
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter your Grid Zone Designator: ");
-		String GridZone = input.nextLine();
+		String YourGridZone = input.nextLine();
 		System.out.print("Enter your position in MGRS Format: ");
 		String MGRS = input.nextLine();
-		System.out.println("Your position in MGRS Grid is" + " " + GridZone + " " + getMGRSFormat(MGRS));
+		System.out.println("Your position in MGRS Grid is" + " " + YourGridZone + " " + getMGRSFormat(MGRS));
 		System.out.println("What is your type of mission?");
 		System.out.println("1. Adjust Fire\n2. Fire For Effect\n3. Suppression\n4. Immediate Suppression\n5. Suppression of Enemy Air Defenses");
 		System.out.print("Choose A Number: ");
@@ -25,12 +25,15 @@ public class CFFCompiler {
 		System.out.println("1. Grid\n2. Polar\n3. Shift");
 		System.out.print("Choose A Number: ");
 		int choice = getChoice(input);
-		conductMission(choice);	
+		String gridMission = "";
+		conductMission(choice, input, gridMission);	
+		//Check to see if it is a Polar or Shift Mission
+		
 		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
-		System.out.print("Enter enemy grid: ");
-		String targetLocation = input.nextLine();
-		System.out.println("Enemy position is" + " " + GridZone + " " + getTargetLocation(targetLocation));
+		//System.out.print("Enter enemy grid: ");
+		//String targetLocation = input.nextLine();
+		//System.out.println("Enemy position is" + " " + GridZone + " " + getTargetLocation(targetLocation));
 		System.out.print("Enter target description: ");
 		String targetDescription = input.nextLine();
 		System.out.println("Target description is" + " " + targetDescription);
@@ -47,6 +50,7 @@ public class CFFCompiler {
 		methodFireControl(fire);
 		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
+		
 	}
 
 	 //Converts MGRS Grid into a proper format
@@ -96,9 +100,10 @@ public class CFFCompiler {
 	}
 
 	//Takes the value of choice and returns a string with the associated mission
-	public static void conductMission(int choice) {
+	public static void conductMission(int choice, Scanner input, String gridMission) {
 		if (choice == 1) {
 			System.out.println("Grid is your method of target location");
+			ifgridMission(input, gridMission);
 		} else if(choice == 2) {
 			System.out.println("Polar is your method of target location");
 		} else if(choice == 3) {
@@ -106,13 +111,23 @@ public class CFFCompiler {
 		}
 	}
 
-	//Converts MGRS Grid into a proper format
+	//Format Target Location
 	public static String getTargetLocation(String targetLocation) {
 		int index = targetLocation.length() / 2;
 		String targetFront = targetLocation.substring(0, index);
 		String targetBack = targetLocation.substring(index);
 		String Space = " ";
 		return targetFront.toString() + Space + targetBack.toString();
+   }
+
+   public static String ifgridMission(Scanner input, String gridMission) {
+		System.out.print("Enter Enemy Grid Zone Designator: ");
+	    String EnemyGridZone = input.nextLine();
+	    System.out.print("Enter enemy grid: ");
+	    String targetLocation = input.nextLine();
+	    System.out.println(targetLocation);
+	    gridMission = "Enemy position is" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation);
+		return gridMission;
    }
 
    //Returns the value of the user input
