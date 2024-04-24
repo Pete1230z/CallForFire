@@ -25,15 +25,11 @@ public class CFFCompiler {
 		System.out.println("1. Grid\n2. Polar\n3. Shift");
 		System.out.print("Choose A Number: ");
 		int choice = getChoice(input);
-		String gridMission = "";
-		conductMission(choice, input, gridMission);	
+		conductMission(choice);	
 		//Check to see if it is a Polar or Shift Mission
 		
 		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
-		//System.out.print("Enter enemy grid: ");
-		//String targetLocation = input.nextLine();
-		//System.out.println("Enemy position is" + " " + GridZone + " " + getTargetLocation(targetLocation));
 		System.out.print("Enter target description: ");
 		String targetDescription = input.nextLine();
 		System.out.println("Target description is" + " " + targetDescription);
@@ -100,10 +96,14 @@ public class CFFCompiler {
 	}
 
 	//Takes the value of choice and returns a string with the associated mission
-	public static void conductMission(int choice, Scanner input, String gridMission) {
+	public static void conductMission(int choice) {
 		if (choice == 1) {
-			System.out.println("Grid is your method of target location");
-			ifgridMission(input, gridMission);
+			Scanner input = new Scanner(System.in);
+			System.out.print("Enter Enemy Grid Zone Designator: ");
+	        String EnemyGridZone = input.nextLine();
+	        System.out.print("Enter enemy grid: ");
+	        String targetLocation = input.nextLine();
+	        System.out.println("Enemy position is" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation));
 		} else if(choice == 2) {
 			System.out.println("Polar is your method of target location");
 		} else if(choice == 3) {
@@ -125,7 +125,7 @@ public class CFFCompiler {
 	    String EnemyGridZone = input.nextLine();
 	    System.out.print("Enter enemy grid: ");
 	    String targetLocation = input.nextLine();
-	    System.out.println(targetLocation);
+	    System.out.print(targetLocation);
 	    gridMission = "Enemy position is" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation);
 		return gridMission;
    }
