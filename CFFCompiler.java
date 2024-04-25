@@ -6,13 +6,17 @@ import java.util.Scanner;
 
 public class CFFCompiler {
 	static int choice;
-	
+	private static String EnemyGridZone;
+	private static String targetLocation;
+
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
 		System.out.print("Enter your Grid Zone Designator: ");
 		String YourGridZone = input.nextLine();
 		System.out.print("Enter your position in MGRS Format: ");
 		String MGRS = input.nextLine();
+		System.out.print("Enter your Call Sign: ");
+		String callSign = input.nextLine();
 		System.out.println("Your position in MGRS Grid is" + " " + YourGridZone + " " + getMGRSFormat(MGRS));
 		System.out.println("What is your type of mission?");
 		System.out.println("1. Adjust Fire\n2. Fire For Effect\n3. Suppression\n4. Immediate Suppression\n5. Suppression of Enemy Air Defenses");
@@ -44,6 +48,10 @@ public class CFFCompiler {
 		methodFireControl(fire);
 		//When methodFireControl calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
+		String missionType = getTypeOfMission(missionNumber);
+		String targetlocationString = conductMission(choice);
+		System.out.println("Warlord this is " + callSign + " " + missionType + " Over");
+		System.out.println(targetlocationString);
 		
 	}
 
@@ -60,7 +68,7 @@ public class CFFCompiler {
 	public static int getMissionNumber(Scanner input) {
 		int missionNumber = 0;
 		try {
-			choice = input.nextInt();
+			missionNumber = input.nextInt();
 		} catch(Exception ex) {
 			System.out.println("This is not a valid selection");
 		}
@@ -68,18 +76,22 @@ public class CFFCompiler {
 	}
 
 	//Takes the value of choice and returns a string with the associated mission
-	public static void getTypeOfMission(int missionNumber) {
+	public static String getTypeOfMission(int missionNumber) {
+		String missionType = "";
 		if (missionNumber == 1) {
-			System.out.println("You are conducting an Adjust Fire Mission");
+			missionType = "Adjust Fire";
 		} else if(missionNumber == 2) {
-			System.out.println("You are conducting a Fire For Effect");
+			missionType = "Fire For Effect";
 		} else if(missionNumber == 3) {
-			System.out.println("You are conducting a Suppression Mission");
+			missionType = "Suppression";
 		}  else if(missionNumber == 4) {
-			System.out.println("You are conducting an Immediate Suppression Mission");
+			missionType = "Immediate Suppression";
 		} else if(missionNumber == 5) {
-			System.out.println("You are conducting a Suppression of Enemy Air Defense");
+			missionType = "Suppression of Enemy Air Defense";
+		} else {
+			missionType = "Unknown Mission Type";
 		}
+		return missionType;
 	}
     
 	//Returns the value of the user input
@@ -94,23 +106,27 @@ public class CFFCompiler {
 	}
 
 	//Takes the value of choice and returns a string with the associated mission
-	public static void conductMission(int choice) {
+	public static String conductMission(int choice) {
+		String targetlocationString = "";
+		Scanner input = new Scanner(System.in);
+		//This makes it to where values are only input if null, so at the end we do not need to input them.
 		if (choice == 1) {
-			Scanner input = new Scanner(System.in);
-			System.out.print("Enter Enemy Grid Zone Designator: ");
-	        String EnemyGridZone = input.nextLine();
-	        System.out.print("Enter enemy grid: ");
-	        String targetLocation = input.nextLine();
-	        System.out.println("Enemy position is" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation));
+			if (EnemyGridZone == null) {
+				System.out.print("Enter Enemy Grid Zone Designator: ");
+	            EnemyGridZone = input.nextLine();
+			}
+			if (targetLocation == null) {
+				System.out.print("Enter enemy grid: ");
+	            targetLocation = input.nextLine();
+			}
+	        targetlocationString = "Grid" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation);
 		} else if(choice == 2) {
-			Scanner input = new Scanner(System.in);
 			System.out.print("Distance to Target in Meters: ");
 	        String distanceToTarget = input.nextLine();
 	        System.out.print("Direction to Target in Mils: ");
 	        String directionToTarget = input.nextLine();
 	        System.out.println("Distance" + " " + distanceToTarget + " " + "meters" + " " + "Direction" + " " + directionToTarget + " " + "mils");
 		} else if(choice == 3) {
-			Scanner input = new Scanner(System.in);
 			System.out.print("Identify know point: Example AB1000: ");
 	        String knownPoint = input.nextLine();
 	        System.out.print("Direction to New Target in Mils: ");
@@ -121,6 +137,7 @@ public class CFFCompiler {
 	        String addDrop = input.nextLine();
 	        System.out.println("Shift" + " " + knownPoint + " " + "Direction" + " " + directionNewTarget + " " + "mils" + " " + leftRight + " " + "meters" + " " + addDrop + " " + "meters");
 		}
+		return targetlocationString;
 	}
 
 	//Format Target Location
@@ -201,10 +218,10 @@ public class CFFCompiler {
 			System.out.println("Do Not Load is your method of fire and control");
 		} else if(fire == 14) {
 			System.out.println("Duration is your method of fire and control");
-	}
+	  }
+    }
 
 
-	}
 	
 }
 
