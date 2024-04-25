@@ -59,6 +59,7 @@ public class CFFCompiler {
 		System.out.println("Warlord this is " + callSign + " " + missionType + " Over");
 		String targetlocationString = conductMission(choice);
 		System.out.println(targetlocationString);
+		System.out.println(targetDescription);
 		
 	}
 
