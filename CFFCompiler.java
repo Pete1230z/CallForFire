@@ -56,8 +56,8 @@ public class CFFCompiler {
 		//When methodFireControl calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
 		String missionType = getTypeOfMission(missionNumber);
-		String targetlocationString = conductMission(choice);
 		System.out.println("Warlord this is " + callSign + " " + missionType + " Over");
+		String targetlocationString = conductMission(choice);
 		System.out.println(targetlocationString);
 		
 	}
@@ -130,22 +130,30 @@ public class CFFCompiler {
 		} else if(choice == 2) {
 			if (distanceToTarget == null) {
 				System.out.print("Distance to Target in Meters: ");
-	            String distanceToTarget = input.nextLine();
+	            distanceToTarget = input.nextLine();
 			}
 			if (directionToTarget == null) {
 				System.out.print("Direction to Target in Mils: ");
-	            String directionToTarget = input.nextLine();
+	            directionToTarget = input.nextLine();
 			}
 	        targetlocationString = "Distance" + " " + distanceToTarget + " " + "meters" + " " + "Direction" + " " + directionToTarget + " " + "mils";
 		} else if(choice == 3) {
-			System.out.print("Identify know point: Example AB1000: ");
-	        String knownPoint = input.nextLine();
-	        System.out.print("Direction to New Target in Mils: ");
-	        String directionNewTarget = input.nextLine();
-			System.out.print("Lateral Shift in Meters: Example Left 30: ");
-	        String leftRight = input.nextLine();
-			System.out.print("Range Shift in Meters: Example Add 100: ");
-	        String addDrop = input.nextLine();
+			if (knownPoint == null) {
+				System.out.print("Identify know point: Example AB1000: ");
+	            knownPoint = input.nextLine();
+			}
+			if (directionNewTarget == null) {
+				System.out.print("Direction to New Target in Mils: ");
+	            directionNewTarget = input.nextLine();
+			}
+			if (leftRight == null) {
+				System.out.print("Lateral Shift in Meters: Example Left 30: ");
+	            leftRight = input.nextLine();
+			} 
+			if (addDrop == null) {
+				System.out.print("Range Shift in Meters: Example Add 100: ");
+	            addDrop = input.nextLine();
+			}
 	        System.out.println("Shift" + " " + knownPoint + " " + "Direction" + " " + directionNewTarget + " " + "mils" + " " + leftRight + " " + "meters" + " " + addDrop + " " + "meters");
 		}
 		return targetlocationString;
