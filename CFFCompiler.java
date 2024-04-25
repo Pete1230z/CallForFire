@@ -5,9 +5,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CFFCompiler {
+	//Putting these variables here makes them accessible within the class
 	static int choice;
 	private static String EnemyGridZone;
 	private static String targetLocation;
+	private static String distanceToTarget;
+	private static String directionToTarget;
+	private static String knownPoint;
+	private static String directionNewTarget;
+	private static String leftRight;
+	private static String addDrop;
 
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -121,11 +128,15 @@ public class CFFCompiler {
 			}
 	        targetlocationString = "Grid" + " " + EnemyGridZone + " " + getTargetLocation(targetLocation);
 		} else if(choice == 2) {
-			System.out.print("Distance to Target in Meters: ");
-	        String distanceToTarget = input.nextLine();
-	        System.out.print("Direction to Target in Mils: ");
-	        String directionToTarget = input.nextLine();
-	        System.out.println("Distance" + " " + distanceToTarget + " " + "meters" + " " + "Direction" + " " + directionToTarget + " " + "mils");
+			if (distanceToTarget == null) {
+				System.out.print("Distance to Target in Meters: ");
+	            String distanceToTarget = input.nextLine();
+			}
+			if (directionToTarget == null) {
+				System.out.print("Direction to Target in Mils: ");
+	            String directionToTarget = input.nextLine();
+			}
+	        targetlocationString = "Distance" + " " + distanceToTarget + " " + "meters" + " " + "Direction" + " " + directionToTarget + " " + "mils";
 		} else if(choice == 3) {
 			System.out.print("Identify know point: Example AB1000: ");
 	        String knownPoint = input.nextLine();
