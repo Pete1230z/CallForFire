@@ -1,7 +1,3 @@
-import java.io.*;
-import java.nio.file.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class CFFCompiler {
@@ -49,7 +45,8 @@ public class CFFCompiler {
 		methodEngagement(engagement);
 		//When conductMission calls nextInt it does not read the entire line so we need to add an extra input.nextLine() to clear out the extra invisible characters
 		input.nextLine();
-		System.out.println("1. When Ready\n2. At My Command\n3. Cannot Observe\n4. Time on Target\n5. Time To Target\n6. Coordinated Illumination\n7. Continuous Illumination\n8. Cease Load\n9. Check Fire\n10. Continuous Fire\n11. Repeat\n12. Request Splash\n13. Do Not Load\n14. Duration");
+		System.out.print("Method of Fire and Control? (Optional)");
+		System.out.println("\n1. When Ready\n2. At My Command\n3. Cannot Observe\n4. Time on Target\n5. Time To Target\n6. Coordinated Illumination\n7. Continuous Illumination\n8. Cease Load\n9. Check Fire\n10. Continuous Fire\n11. Repeat\n12. Request Splash\n13. Do Not Load\n14. Duration");
 		System.out.print("Choose A Number: ");
 		int fire = getFireControl(input);
 		methodFireControl(fire);
@@ -58,8 +55,11 @@ public class CFFCompiler {
 		String missionType = getTypeOfMission(missionNumber);
 		System.out.println("Warlord this is " + callSign + " " + missionType + " Over");
 		String targetlocationString = conductMission(choice);
-		System.out.println(targetlocationString);
-		System.out.println(targetDescription);
+		System.out.println(targetlocationString + " Over");
+		String engagementMethod = methodEngagement(engagement);
+		String fireMethod = methodFireControl(fire);
+		System.out.println(targetDescription + " " + engagementMethod + " " + fireMethod + " Over");
+
 		
 	}
 
@@ -117,7 +117,7 @@ public class CFFCompiler {
 	public static String conductMission(int choice) {
 		String targetlocationString = "";
 		Scanner input = new Scanner(System.in);
-		//This makes it to where values are only input if null, so at the end we do not need to input them.
+		//This makes it to where values are only input if null, so at the end we do not need to input them again when we compile the user inputs.
 		if (choice == 1) {
 			if (EnemyGridZone == null) {
 				System.out.print("Enter Enemy Grid Zone Designator: ");
@@ -181,21 +181,24 @@ public class CFFCompiler {
 	}
 
 	//Takes the value of engagement and returns a string with the associated mission
-	public static void methodEngagement(int engagement) {
+	public static String methodEngagement(int engagement) {
+		String engagementMethod = " ";
 		if (engagement == 1) {
+			engagementMethod = "";
 		} else if(engagement == 2) {
-			System.out.println("Type of Adjustment is your method of target engagement");
+			engagementMethod = "Type of Adjustment";
 		} else if(engagement == 3) {
-			System.out.println("Danger Close is your method of target engagement");
+			engagementMethod = "Danger Close";
 		} else if(engagement == 4) {
-			System.out.println("Mark is your method of target engagement");
+			engagementMethod = "Mark";
 		} else if(engagement == 5) {
-			System.out.println("Trajectory is your method of target engagement");
+			engagementMethod = "Trajectory";
 		} else if(engagement == 6) {
-			System.out.println("Ammunition is your method of target engagement");
+			engagementMethod = "Ammunition";
 		} else if(engagement == 7) {
-			System.out.println("Distribution is your method of target engagement");
+			engagementMethod = "Distribution";
 		} 
+		return engagementMethod;
 	}
 
 	//Returns the value of the user input
@@ -210,38 +213,40 @@ public class CFFCompiler {
 	}
 
 	//Takes the value of engagement and returns a string with the associated mission
-	public static void methodFireControl(int fire) {
+	public static String methodFireControl(int fire) {
+		String fireMethod = " ";
 		if (fire == 1) {
+			fireMethod = "";
 		} else if(fire == 2) {
-			System.out.println("At my Command is your method of fire and control");
+			fireMethod = "At my Command";
 		} else if(fire == 3) {
-			System.out.println("Cannot Observe is your method of fire and control");
+			fireMethod = "Cannot Observe";
 		} else if(fire == 4) {
-			System.out.println("Time on Target is your method of fire and control");
+			fireMethod = "Time on Target";
 		} else if(fire == 5) {
-			System.out.println("Time to Target is your method of fire and control");
+			fireMethod = "Time to Target";
 		} else if(fire == 6) {
-			System.out.println("Coordinated Illumination is your method of fire and control");
+			fireMethod = "Coordinated Illumination";
 		} else if(fire == 6) {
-			System.out.println("Continuous Illumination is your method of fire and control");
+			fireMethod = "Continuous Illumination";
 		} else if(fire == 8) {
-			System.out.println("Cease Load is your method of fire and control");
+			fireMethod = "Cease Load";
 		} else if(fire == 9) {
-			System.out.println("Check Fire is your method of fire and control");
+			fireMethod = "Check Fire";
 		} else if(fire == 10) {
-			System.out.println("Continuous Fire is your method of fire and control");
+			fireMethod = "Continuous Fire";
 		} else if(fire == 11) {
-			System.out.println("Repeat is your method of fire and control");
+			fireMethod = "Repeat";
 		} else if(fire == 12) {
-			System.out.println("Request Splash is your method of fire and control");
+			fireMethod = "Request Splash";
 		} else if(fire == 13) {
-			System.out.println("Do Not Load is your method of fire and control");
+			fireMethod = "Do Not Load";
 		} else if(fire == 14) {
-			System.out.println("Duration is your method of fire and control");
+			fireMethod = "Duration";
 	  }
+	  return fireMethod;
     }
 
 
-	
 }
 
